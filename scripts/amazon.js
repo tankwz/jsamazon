@@ -8,27 +8,27 @@
   },
   priceCents
 }];*/
-let  productshtml ='';
-products.forEach((products) =>{
+let productshtml = '';
+products.forEach((product) => {
   productshtml += `
   <div class="product-container">
   <div class="product-image-container">
-    <img class="product-image" src="${products.image}">
+    <img class="product-image" src="${product.image}">
   </div>
 
   <div class="product-name limit-text-to-2-lines">
-    ${products.name}
+    ${product.name}
   </div>
 
   <div class="product-rating-container">
-    <img class="product-rating-stars" src="images/ratings/rating-${products.rating.stars * 10}.png">
+    <img class="product-rating-stars" src="images/ratings/rating-${product.rating.stars * 10}.png">
     <div class="product-rating-count link-primary">
-    ${products.rating.count}
+    ${product.rating.count}
     </div>
   </div>
 
   <div class="product-price">
-    $${(products.priceCents/100).toFixed(2)}
+    $${(product.priceCents / 100).toFixed(2)}
   </div>
 
   <div class="product-quantity-container">
@@ -53,21 +53,34 @@ products.forEach((products) =>{
     Added
   </div>
 
-  <button class="add-to-cart-button button-primary js-cart-button data-product-name="${products.name}">
+  <button class="add-to-cart-button button-primary js-add-to-cart" data-product-name="${product.name}">
     Add to Cart
   </button>
 </div>
   `
 })
-document.querySelector(".js-products-grid").innerHTML =productshtml
+document.querySelector(".js-products-grid").innerHTML = productshtml
 
-document.querySelectorAll('.js-cart-button').forEach((btn)=>{
-  btn.addEventListener('click',()=>{
-    console.log(btn.dataset.pro);
-  } )
+document.querySelectorAll(".js-add-to-cart").forEach((btn) => {
+  btn.addEventListener('click', ()=>{
+    const productName = btn.dataset.productName;
+    let matchingItem = 0;
+    cart.forEach((item)=>{
+      if (item.productName === productName){
+        matchingItem= item;
+      }
+    });
+    if (matchingItem){
+      matchingItem.quantity++;
+    }
+    else cart.push({
+       productName: productName,
+       quantity :1
+    });
+    console.log(cart);
+  }
+  )
 })
-
-
 
 
 
