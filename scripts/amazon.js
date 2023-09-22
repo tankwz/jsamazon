@@ -1,5 +1,5 @@
 //21/9
-import {cart} from '../data/cart.js'
+import {cart, addToCart} from '../data/cart.js'
 import {products} from '../data/products.js'
 /*const products = [{
   image,
@@ -63,25 +63,13 @@ products.forEach((product) => {
 })
 document.querySelector(".js-products-grid").innerHTML = productshtml
 
-function addToCart( productId){
-  
-  let itemName=0;
-  cart.forEach((item) =>{
-    if (item.productId === productId)
-      itemName = item;
-  })
-  if (itemName){
-    itemName.quantity++;
-  }
-  else {
-    cart.push({
-      productId : productId,
-      quantity :1  
-    })
-  }
-}
 
-function updateCartQuantity(){
+
+
+
+
+
+ function updateCartQuantity(){
   
   let cartQuantity = 0;
   cart.forEach((item)=>{
@@ -103,16 +91,6 @@ document.querySelectorAll(".js-add-to-cart").forEach((btn) => { btn.addEventList
 })
 
 })
-
-
-
-
-
-
-
-
-
-
 /*
 
 document.querySelectorAll(".js-add-to-cart").forEach((btn) => {
